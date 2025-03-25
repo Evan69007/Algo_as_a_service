@@ -8,17 +8,17 @@ app.post('/', (req, res) => {
 	let toSort = req.body.values
 	let sort_order = req.body.sort_order
 	let sorted
-	if (sort_order === "asc")
+	switch (sort_order)
 	{
-		sorted = sortAsc(toSort)
-	}
-	else if (sort_order === "desc")
-	{
-		sorted = sortDesc(toSort)
-	}
-	else
-	{
-		sorted = toSort
+		case "desc":
+			sorted = sortDesc(toSort);
+			break;
+		case "asc":
+			sorted = sortAsc(toSort);
+			break;
+		default:
+			sorted = toSort;
+			break;
 	}
 	res.json({"sorted_values": sorted})
 })
